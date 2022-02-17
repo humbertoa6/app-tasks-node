@@ -7,5 +7,7 @@ module.exports = function() {
   //home route
   router.get('/', projectsController.projectsHome);
   router.get('/about', projectsController.projectsAbout);
+  router.get('/new_project', projectsController.projectsNew);
+  router.post('/new_project', projectsController.projectsCreate);
   return router;
 }
