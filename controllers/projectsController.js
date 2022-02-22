@@ -1,3 +1,6 @@
+const Projects = require('../models/Projects');
+const slug = require('slug');
+
 exports.projectsHome = (req, res) => {
   res.render('index', {
     namePage: 'ProjectsApp'
@@ -8,13 +11,13 @@ exports.projectsAbout = (req, res) => {
   res.render('about');
 }
 
-exports.projectsNew = (req, res) => {
+exports.projectsNew = async (req, res) => {
   res.render('new_project', {
     namePage: 'New Project'
   });
 }
 
-exports.projectsCreate = (req, res) => {
+exports.projectsCreate = async(req, res) => {
   const { name } = req.body;
   let errors = [];
 
@@ -28,6 +31,7 @@ exports.projectsCreate = (req, res) => {
       errors
     });
   } else {
-
+    const project = await Projects.create({ name })
+    res.redirect('/');
   }
 }

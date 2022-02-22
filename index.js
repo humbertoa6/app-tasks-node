@@ -2,7 +2,21 @@ const express = require('express');
 const routes = require('./routes');
 const path = require('path');
 const bodyParser = require('body-parser');
+const db = require('./config/db');
 
+//import models
+require('./models/Projects');
+// connect to db
+async function connect_db() {
+  try {
+    await db.sync();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+}
+
+connect_db();
 // create express app
 const app = express();
 
