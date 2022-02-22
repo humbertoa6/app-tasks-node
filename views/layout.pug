@@ -19,11 +19,11 @@ html(lang="en")
             span +
         .panel.lista-proyectos
           ul#proyectos.proyectos 
-            li 
-              a(href="#") Project 1 
-            li 
-              a(href="#") Project 2 
-            li 
-              a(href="#") Project 3
+            if(projects)
+              each project in projects
+                li 
+                  a(href=`/projects/${project.url}`)= project.name
 
       block content
+
+      //pre= vardump(projects)

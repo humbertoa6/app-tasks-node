@@ -4,6 +4,9 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const db = require('./config/db');
 
+//helpers
+const helpers = require('./helpers');
+
 //import models
 require('./models/Projects');
 // connect to db
@@ -28,6 +31,12 @@ app.set('view engine', 'pug')
 
 // load views
 app.set('views', path.join(__dirname, './views'))
+
+//use helpers
+app.use((req, res, next) => {
+  res.locals.vardump = helpers.vardump;
+  next();
+});
 
 // enable body parser
 app.use(bodyParser.urlencoded({extended: true}));

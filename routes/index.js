@@ -13,5 +13,7 @@ module.exports = function() {
   router.get('/about', projectsController.projectsAbout);
   router.get('/new_project', projectsController.projectsNew);
   router.post('/new_project', body('name').not().isEmpty().trim().escape(), projectsController.projectsCreate);
+  //show project
+  router.get('/projects/:url', projectsController.projectsShow);
   return router;
 }
