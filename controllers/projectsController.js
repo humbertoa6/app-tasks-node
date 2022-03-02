@@ -1,4 +1,5 @@
 const Projects = require('../models/Projects');
+const Tasks = require('../models/Tasks');
 const slug = require('slug');
 const { nextTick } = require('process');
 
@@ -50,13 +51,22 @@ exports.projectsShow = async (req, res) => {
   });
 
   const [projects, project] = await Promise.all([projectsPromise, projectPromise]);
+  const tasks = await Tasks.findAll({ 
+    where: {
+      projectId: project.id
+    },
+    include: [
+      { model: Projects }
+    ]
+  });
 
   if(!project) return next();
 
   res.render('show', {
     namePage: 'Show Project',
     projects,
-    project
+    project,
+    tasks
   });
 }
 

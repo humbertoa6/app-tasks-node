@@ -4,6 +4,24 @@ block content
   .contenido-principal 
     h1 #{namePage} - #{project.name}
 
+    form.agregar-tarea(action=`/tasks/${project.url}` method='POST')
+      .campo 
+        label(for='task') Tarea: 
+        input.nombre-tarea(type="text" name='task' placeholder="Task name")
+
+    .listado-pendientes
+      ul 
+        if tasks.length > 0
+          each task in tasks 
+            li.tarea(data-task=task.id data-projectId=task.projectId)
+              p= task.name
+              .acciones 
+                if task.status == 1
+                  i.far.fa-check-circle.completo
+                else 
+                  i.far.fa-check-circle
+                i.fas.fa-trash
+              
     .contenedor-acciones 
       a(href=`/projects/${project.id}/edit` class='boton') Edit Project
       button#eliminar-proyecto(data-project-url=project.url type='button' class='boton eliminar') Delete project

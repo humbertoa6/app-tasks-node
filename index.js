@@ -9,6 +9,7 @@ const helpers = require('./helpers');
 
 //import models
 require('./models/Projects');
+require('./models/Tasks');
 // connect to db
 async function connect_db() {
   try {
